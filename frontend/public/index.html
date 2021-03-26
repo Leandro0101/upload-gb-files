@@ -17,13 +17,13 @@
         <div class="form-group">
           <label for="file">Files</label>
           <input 
-            type="file" 
-            class="form-control" 
-            id="file" 
-            name="file" 
-            onchange="showSize()"
-            multiple
-            />
+          type="file" 
+          class="form-control" 
+          id="file" 
+          name="file" 
+          onchange="showSize()"
+          multiple
+          />
           <output class="span" id="size">1 GB</output>
           <br />
           <output class="span" id="msg">File upload with success</output>
@@ -37,3 +37,39 @@
   </div>
 </body>
 </html>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js"></script>
+<script>
+const init = () => {
+    const inputEmail = document.querySelector('input[type="email"]');
+    const inputPassword = document.querySelector('input[type="password"]');
+    const submitButton = document.querySelector('.login__submit');
+
+    if(submitButton) {
+        submitButton.addEventListener('click', (event) => {
+            event.preventDefault();
+
+            fetch('https://reqres.in/api/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: inputEmail.value,
+                    password: inputPassword.value,
+                })
+            }).then((response) => {
+                return response.json();
+            }).then((data) => {
+                console.log(data)
+            })
+        })
+    }
+}
+
+window.onload = init;
+</script>
+
+
+
